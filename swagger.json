@@ -1,0 +1,89 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Type": {
+				"description": "",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "Search Application",
+		"version": "2",
+		"description": "Search Application...",
+		"license": {
+			"name": "abc"
+		},
+		"contact": {
+			"name": "abc"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/types/{typeId}": {
+			"get": {
+				"operationId": "GetType",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Type"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Types"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "typeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://localhost:8000/search"
+		}
+	],
+	"tags": [
+		{
+			"name": "Types",
+			"description": "A Type defines the shape/structure for an Alert."
+		},
+		{
+			"name": "Alerts",
+			"description": "An Alert is an instance of a Type."
+		}
+	]
+}
