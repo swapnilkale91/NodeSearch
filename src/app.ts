@@ -18,8 +18,8 @@ export class Server {
 		const databaseConnection = Server.createDbConnection(pgPromiseClient);
 		const log: Logger = new Logger();
 		const dependencies = Server.initializeDependencies(pgPromiseClient, databaseConnection, log);
-		const createSchema = new CreateSchema(this.app, dependencies);
-		const alertcontroller = new SearchController(this.app, dependencies);
+		//const createSchema = new CreateSchema(this.app, dependencies);
+		const searchcontroller = new SearchController(this.app, dependencies);
 		//this.app.use(exceptionHandler); // Middleware function to log the exception.
 	}
 
