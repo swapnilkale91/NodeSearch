@@ -1,7 +1,8 @@
 import { SearchRepository } from '../repositories/SearchRepository';
 import { Dependencies } from '../types/dependencies';
+import { SearchParamsDTO } from 'common';
 
-export default class SearchService {
+export class SearchService {
 
 	private readonly searchRepository: SearchRepository;
 
@@ -9,7 +10,11 @@ export default class SearchService {
 		this.searchRepository = new SearchRepository(dependencies);
 	}
 
-	public async getSearch(search: string, itemsperpage: string, pagenumber: string, orderBy: string) {
-		return this.searchRepository.getSearch(search, itemsperpage, pagenumber, orderBy);
+	public async getSearch(searchparams: SearchParamsDTO) {
+		if(searchparams.pagenumber && searchparams.itemsperpage) {
+			searchparams.offset = (searchparams.pagenumber - 1) * searchparams.itemsperpage; 
+		}
+		return this.searchRepository.getSearch(searchparams);
 	}
 }
+ 
