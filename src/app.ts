@@ -1,11 +1,11 @@
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import { SearchController } from './controllers/SearchController';
-import { CreateSchema } from './utils/CreateSchema';
+import { SearchController } from './app/controllers/SearchController';
+import { CreateSchema } from './app/utils/CreateSchema';
 import pgPromise from 'pg-promise';
 import { Logger } from 'tslog';
-import { Dependencies } from './types/dependencies';
-import { exceptionHandler } from './middlewares/exception-handler';
+import { Dependencies } from './app/types/dependencies';
+import { exceptionHandler } from './app/middlewares/exception-handler';
 import * as dotenv from 'dotenv';
 
 export class Server {

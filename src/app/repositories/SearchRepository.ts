@@ -9,7 +9,7 @@ export class SearchRepository {
 		this.pgp = dependencies.PGP;
 	}
 
-	public async getSearch() {
+	public async getSearch(search: string, page: string, size: string) {
 		return this.databaseObject.one('select now()');
 	}
 }

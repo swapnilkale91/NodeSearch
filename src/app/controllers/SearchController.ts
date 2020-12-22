@@ -21,10 +21,12 @@ export class SearchController {
 	}
 
 	public async searchAlerts(req: express.Request, res: express.Response): Promise<any> {
-		let outputData = [];
+		const search: string = req.params.search;
+		const page: string = req.params.page;
+		const size: string = req.params.size;
 		try {
-			outputData = await this.searchService.getSearch();
-			res.status(StatusCodes.OK).send(outputData);
+			const output = await this.searchService.getSearch(search, page, size);
+			res.status(StatusCodes.OK).send(output);
 		} catch (err) {
 			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 		}

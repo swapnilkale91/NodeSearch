@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "node build/app.js",
     "watch-serve": "nodemon build/app.js",
-    "build": "tsc",
+    "build": "tsc --project ./",
     "watch-build": "tsc -w",
     "start": "npm run build && npm run serve",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-build\" \"npm run watch-serve\"",
@@ -30,6 +30,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
-    "pg-promise": "^10.8.6"
+    "pg-promise": "^10.8.6",
+    "tslog": "^3.0.2"
   }
 }

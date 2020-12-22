@@ -9,7 +9,7 @@ export default class SearchService {
 		this.searchRepository = new SearchRepository(dependencies);
 	}
 
-	public async getSearch() {
-		return this.searchRepository.getSearch();
+	public async getSearch(search: string, page: string, size: string) {
+		return this.searchRepository.getSearch(search, page, size);
 	}
 }
