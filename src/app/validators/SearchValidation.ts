@@ -10,14 +10,16 @@ export class SearchValidation {
 
 	public validateSearchRequestProperties(property: any, value: any) {
 		switch (property) {
-			case constants.PAGE_SIZE:
+			case constants.ITEMSPERPAGE:
 				break;
-			case constants.OFFSET:
+			case constants.PAGENUMBER:
 				break;
 			case constants.SEARCH:
 				break;
 			case constants.ORDERBY:
 				break;
+			case constants.ORDERDIRECTION:
+					break;
 			default: this.errors.push(new URIError(constants.INVALID_PROP(property)));
 		}
 	}

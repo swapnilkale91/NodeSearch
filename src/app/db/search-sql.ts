@@ -3,7 +3,7 @@ import { SearchParamsDTO } from "common";
 export let searchQuery = (searchparams: SearchParamsDTO, tablename: string, pgp: any) => {
 
 	let query = `select *,  count(*) OVER() AS totalCount
-				 from ${tablename} `
+				 from ${tablename}`
 	if (!searchparams.search) {
 		query += orderLimitOffset(searchparams);
 	} else {
@@ -15,22 +15,20 @@ export let searchQuery = (searchparams: SearchParamsDTO, tablename: string, pgp:
 };
 
 function getWhereClause(search: string) {
-	let whereclause: string = `where`;
+	let whereclause: string = ` where `;
 
 	if (!search.includes('"')) {
-		let searchwords: Array<string> = search.trim().split(' ');
-		searchwords.forEach(function (elem, index) {
-			whereclause += ` "name" like '%${elem}%' or "description" like '%${elem}%' or `;
-		})
-		whereclause = whereclause.substr(0, whereclause.length - 3);
+		let searchwords: string[] = search.split(' ');
+		searchwords.join(' & ');
+		whereclause += ` searchterms @@ to_tsquery('simple', '${search}')`
 	} else {
 		search = search.replace(/"/g, '');
-		whereclause += ` "name" like '%${search}%' or "description" like '%${search}%' `;
+		whereclause += ` searchterms @@ phraseto_tsquery('simple', '${search}')`;
 	}
 
 	return whereclause;
 }
 
 function orderLimitOffset(searchparams: SearchParamsDTO) {
-	return searchparams.orderby ? `order by "${searchparams.orderby}" ${searchparams.orderdirection || 'asc'} limit ${searchparams.itemsperpage} offset ${searchparams.offset}` : '';
+	return ` order by "${searchparams.orderby || 'id'}" ${searchparams.orderdirection || 'asc'} limit ${searchparams.itemsperpage} offset ${searchparams.offset}`;
 }

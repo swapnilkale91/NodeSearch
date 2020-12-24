@@ -10,6 +10,12 @@ import * as dotenv from 'dotenv';
 
 export class Server {
 	private readonly app: Application;
+	private readonly options: any = {
+		"origin": "*",
+		"methods": "GET",
+		"preflightContinue": false,
+		"optionsSuccessStatus": 204
+	  }
 
 	constructor() {
 		this.app = express();
@@ -18,7 +24,7 @@ export class Server {
 		const databaseConnection = Server.createDbConnection(pgPromiseClient);
 		const log: Logger = new Logger();
 		const dependencies = Server.initializeDependencies(pgPromiseClient, databaseConnection, log);
-		//const createSchema = new CreateSchema(this.app, dependencies);
+		const createSchema = new CreateSchema(this.app, dependencies);
 		const searchcontroller = new SearchController(this.app, dependencies);
 		//this.app.use(exceptionHandler); // Middleware function to log the exception.
 	}

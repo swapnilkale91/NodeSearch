@@ -11,10 +11,11 @@ export class SearchService {
 	}
 
 	public async getSearch(searchparams: SearchParamsDTO) {
-		if(searchparams.pagenumber && searchparams.itemsperpage) {
-			searchparams.offset = (searchparams.pagenumber - 1) * searchparams.itemsperpage; 
+		if (searchparams.pagenumber && searchparams.itemsperpage) {
+			searchparams.offset = (searchparams.pagenumber - 1) * searchparams.itemsperpage;
 		}
+
 		return this.searchRepository.getSearch(searchparams);
 	}
 }
- 
+

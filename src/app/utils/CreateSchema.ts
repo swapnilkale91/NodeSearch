@@ -31,6 +31,9 @@ export class CreateSchema {
 			tx.batch([
 				tx.none(createQueries.createSchema('SearchApp')),
 				tx.none(createQueries.createSearchTable(tablename)),
+				tx.none(createQueries.createTSVectorTrigger(tablename)),
+				tx.none(createQueries.createSearchIndex(tablename)),	
+				tx.none(createQueries.deleteSearchData(tablename)),	
 				tx.none(this.pgp.helpers.insert(JSON.parse(filejson), cs))
 			]));
 	};

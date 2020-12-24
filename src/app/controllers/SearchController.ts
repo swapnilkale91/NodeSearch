@@ -36,9 +36,10 @@ export class SearchController {
 			/* TODO : need to move the count logic somewhere else */
 			const totalCount = output[0] ? output[0].totalcount : 0;
 			output.map((value: any) => delete value.totalcount);
-			res.setHeader('totalCount', totalCount);
+			const finaloutput = { 'data': output, 'totalcount': totalCount};
+			res.setHeader('Access-Control-Allow-Origin', '*')
 			/* TODO : need to move the count logic somewhere else */
-			res.status(StatusCodes.OK).send(output);
+			res.status(StatusCodes.OK).send(finaloutput);
 		} catch (err) {
 			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
 		}
