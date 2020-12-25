@@ -2,7 +2,7 @@ import { SearchParamsDTO } from "common";
 
 export let searchQuery = (searchparams: SearchParamsDTO, tablename: string, pgp: any) => {
 
-	let query = `select *,  count(*) OVER() AS totalCount
+	let query = `select id, name, imageurl, description, count(*) OVER() AS totalCount
 				 from ${tablename}`
 	if (!searchparams.search) {
 		query += orderLimitOffset(searchparams);
@@ -19,7 +19,7 @@ function getWhereClause(search: string) {
 
 	if (!search.includes('"')) {
 		let searchwords: string[] = search.split(' ');
-		searchwords.join(' & ');
+		search = searchwords.join(' & ');
 		whereclause += ` searchterms @@ to_tsquery('simple', '${search}')`
 	} else {
 		search = search.replace(/"/g, '');

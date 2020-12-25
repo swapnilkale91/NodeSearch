@@ -21,27 +21,20 @@ export class SearchController {
 
 	public registerRoutes(): void {
 		this.app.route('/search')
-			.get(this.getSearch);
+			.get(this.searchvalidation.validateSearchRequest.bind(this.searchvalidation), this.getSearch);
 	}
 
 	public async getSearch(req: express.Request, res: express.Response): Promise<any> {
-	/* 	const search: any = req.query.search;
-		const itemsperpage: any = req.query.itemsperpage; // 6
-		const pagenumber: any = req.query.pagenumber;
-		const orderBy: any = req.query.orderby; */
-
 		try {
-			this.searchvalidation.validateSearchRequest(req.query);
+			// this.searchvalidation.validateSearchRequest(req.query, res);
 			const output = await this.searchService.getSearch(req.query);
-			/* TODO : need to move the count logic somewhere else */
 			const totalCount = output[0] ? output[0].totalcount : 0;
 			output.map((value: any) => delete value.totalcount);
-			const finaloutput = { 'data': output, 'totalcount': totalCount};
-			res.setHeader('Access-Control-Allow-Origin', '*')
-			/* TODO : need to move the count logic somewhere else */
+			const finaloutput = { 'data': output, 'totalcount': totalCount };
 			res.status(StatusCodes.OK).send(finaloutput);
-		} catch (err) {
-			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
+		} catch (error) {
+			console.log('error : ', error)
+			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
 		}
 	}
 }

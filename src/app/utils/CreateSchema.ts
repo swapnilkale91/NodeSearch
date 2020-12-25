@@ -16,7 +16,7 @@ export class CreateSchema {
 		this.app = app;
 		this.pgp = dependencies.PGP;
 		this.databaseObject = dependencies.databaseConfig;
-		this.createSchemaAndTables();
+		//this.createSchemaAndTables();
 	}
 
 	public async createSchemaAndTables() {
