@@ -13,7 +13,7 @@
     "lint": "eslint --fix",
     "test": "nyc --reporter=lcov mocha -r ts-node/register src/tests/**/*.ts"
   },
-  "author": "",
+  "author": "Swapnil Kale",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.0.4",
@@ -42,5 +42,9 @@
     "pg-promise": "^10.8.6",
     "tslog": "^3.0.2",
     "validator": "^13.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swapnilkale91/NodeSearch.git"
   }
 }
