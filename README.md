@@ -19,15 +19,6 @@ First, we must download the code using git.
 git clone https://github.com/swapnilkale91/NodeSearch.git
 ```
 
-### Setting Up Database and Code with docker
-Before we start the project, we need to have the Postgres database up & running. For ease of development, this project ships with a [docker-compose](https://docs.docker.com/compose/) file which will setup the Postgres for you. Assuming you have the Docker installed, run the below command to setup Postgres
-
-```sh
-cd NodeSearch
-docker build -t mynodesearchapp .
-docker-compose up -d
-```
-
 ### Setting up configuration
 This project reads the configuration from environment variables. The default values can be found in `.env.sample` file. We will create a copy of this file as `.env`. During bootup [dotenv](https://www.npmjs.com/package/dotenv) will read this file & sets up the values in `process,env` variable which will be consumed by the application.
 ```sh
@@ -37,16 +28,20 @@ cp .env.sample .env
 ```
 > Feel free to modify this configuration values in this newly created file as per your setup. If you have different database setup, you will need to update those here.
 
+
 ### Running the application without Docker
-Now that we have compiled the source files into Javascript from TS, we start the node server by simply running the below command
 ```sh
 cd NodeSearch
 npm start
 ```
-### Compiling Typescript to JS
-This application is written in Typescript. But as Node can only execute Javasript, we will first compile all the typescript files from './src' folder into `./build` by running
+
+### Setting Up Database and Code with Docker
+Before we start the project, we need to have the Postgres database up & running. For ease of development, this project ships with a [docker-compose](https://docs.docker.com/compose/) file which will setup the Postgres for you. Assuming you have the Docker installed, run the below command to setup Postgres
+
 ```sh
-npm run build
+cd NodeSearch
+docker build -t mynodesearchapp .
+docker-compose up -d
 ```
 
 ## Development
