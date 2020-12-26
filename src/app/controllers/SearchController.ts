@@ -20,20 +20,19 @@ export class SearchController {
 
 	public registerRoutes(): void {
 		this.app.route('/search')
-			.get(this.searchvalidation.validateSearchRequest.bind(this.searchvalidation), this.getSearch);
+			.get(this.getSearch);
 	}
 
 	public async getSearch(req: express.Request, res: express.Response): Promise<any> {
 		try {
-			//this.searchvalidation.validateSearchRequest(req.query, res);
+			this.searchvalidation.validateSearchRequest(req.query);
 			const output = await this.searchService.getSearch(req.query);
 			const totalCount = output[0] ? output[0].totalcount : 0;
 			output.map((value: any) => delete value.totalcount);
 			const finaloutput = { 'data': output, 'totalcount': totalCount };
 			res.status(StatusCodes.OK).send(finaloutput);
 		} catch (error) {
-			console.log('error : ', error)
-			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
+			res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 import { SearchParamsDTO } from "common";
 
 export let searchQuery = (searchparams: SearchParamsDTO, tablename: string, pgp: any) => {
-
 	let query = `select id, name, imageurl, description, count(*) OVER() AS totalCount
 				 from ${tablename}`
 	if (!searchparams.search) {

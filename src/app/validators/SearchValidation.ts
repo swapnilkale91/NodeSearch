@@ -11,20 +11,30 @@ export class SearchValidation {
 	}
 
 	validatePositiveInt(property: string, value: any) {
-		if (!validator.isInt(value, { min: 0 }))
+		if (!validator.isInt(value, { min: 0 })) {
 			this.errors.push(new Error(constants.INT_TYPE_ERROR(property, 'number')));
+			return false;
+		}
+
+		return true;
 	}
 
 	validateOrderBy(value: any) {
 		if (value && value != constants.NAME && value != constants.DATELASTEDITED) {
 			this.errors.push(new Error(constants.ORDERBY_TYPE_ERROR(value)));
+			return false;
 		}
+
+		return true;
 	}
 
 	validateOrderDirection(value: any) {
 		if (value && value != constants.ORDERBYDIRECTIONASC && value != constants.ORDERBYDIRECTIONDESC) {
 			this.errors.push(new Error(constants.ORDERDIRECTION_TYPE_ERROR(value)));
+			return false;
 		}
+		
+		return true;
 	}
 
 	public validateSearchRequestProperties(property: any, value: any) {
@@ -47,17 +57,17 @@ export class SearchValidation {
 		}
 	}
 
-	validateSearchRequest(req: express.Request, res: express.Response, next: NextFunction) {
+	validateSearchRequest(searchparams: any) {
 		this.errors = [];
-		for (let key in req.query) {
-			this.validateSearchRequestProperties(key, (req.query as any)[key]);
+		for (let key in searchparams) {
+			this.validateSearchRequestProperties(key, (searchparams as any)[key]);
 		}
 
 		if (this.errors.length > 0) {
-			res.status(400).json({ errors: this.errors.map(e => e.message) });
-		} else {
-			next();
+			 let error = this.errors.map(e => e.message)
+			 throw error;
 		}
 
+		return true;
 	}
 }
