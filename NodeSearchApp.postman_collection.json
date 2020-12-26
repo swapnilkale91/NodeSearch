@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "c2faf4b4-e1ac-44cd-aeb7-70f080d5e033",
+		"name": "NodeSearchApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/search?search=aut&orderby=name&pagenumber=1&orderdirection=desc&itemsperpage=6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "aut"
+						},
+						{
+							"key": "orderby",
+							"value": "name"
+						},
+						{
+							"key": "pagenumber",
+							"value": "1"
+						},
+						{
+							"key": "orderdirection",
+							"value": "desc"
+						},
+						{
+							"key": "itemsperpage",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

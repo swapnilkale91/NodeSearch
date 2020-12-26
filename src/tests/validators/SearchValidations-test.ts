@@ -64,28 +64,4 @@ describe('Testing the validation Service ', () => {
 		sinon.assert.calledOnce(spyOnvalidateOrderDirection);
 		spyOnvalidateOrderDirection.restore();
 	})
-
-	it('should call validateSearchRequest and throw error', () => {
-		const searchparams = {
-			search: '',
-			orderby: 'name',
-			orderdirection: 'asc',
-			itemsperpage: '6',
-			pagenumber: '-1'
-		}
-		const searchvalidation = new SearchValidation();	
-		assert.throw(() => { searchvalidation.validateSearchRequest(searchparams) });		
-	})
-
-	it('should call validateSearchRequest and not throw error', () => {
-		const searchparams = {
-			search: 'search',
-			orderby: 'name',
-			orderdirection: 'asc',
-			itemsperpage: '6',
-			pagenumber: '1'
-		}
-		const response = new SearchValidation().validateSearchRequest(searchparams);
-		expect(response).to.be.equal(true);
-	})
 })

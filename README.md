@@ -17,6 +17,8 @@ A simple full text search engine for Node written in Typescript.
 First, we must download the code using git.
 ```sh
 git clone https://github.com/swapnilkale91/NodeSearch.git
+
+cd NodeSearch
 ```
 
 ### Setting up configuration
@@ -25,21 +27,27 @@ This project reads the configuration from environment variables. The default val
 cp .env.sample .env
 
 #Keep DB_HOST='postgres' if running docker on local.
+#Keep DB_HOST='127.0.0.1' if running on local without docker.
 ```
 > Feel free to modify this configuration values in this newly created file as per your setup. If you have different database setup, you will need to update those here.
 
 
-### Running the application without Docker
+# Running the application without Docker
+As with every node project, we install the dependencies first, then build and start listening on the port.
 ```sh
-cd NodeSearch
+npm install
+
 npm start
 ```
+If the postgres connects it will create the schema, tables and insert mock data into the database.
 
-### Setting Up Database and Code with Docker
+### Postman collection
+Postman Collection can be found [here](NodeSearchApp.postman_collection.json)
+
+#  Running the application with Docker
 Before we start the project, we need to have the Postgres database up & running. For ease of development, this project ships with a [docker-compose](https://docs.docker.com/compose/) file which will setup the Postgres for you. Assuming you have the Docker installed, run the below command to setup Postgres
 
 ```sh
-cd NodeSearch
 docker build -t mynodesearchapp .
 docker-compose up -d
 ```
