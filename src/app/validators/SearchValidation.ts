@@ -1,7 +1,7 @@
 import * as constants from '../utils/constants';
 import express from 'express';
 import { NextFunction } from 'connect';
-const validator = require('validator');
+import validator from 'validator';
 
 export class SearchValidation {
 
@@ -16,13 +16,13 @@ export class SearchValidation {
 	}
 
 	validateOrderBy(value: any) {
-		if (value != constants.NAME && value != constants.DATELASTEDITED) {
+		if (value && value != constants.NAME && value != constants.DATELASTEDITED) {
 			this.errors.push(new Error(constants.ORDERBY_TYPE_ERROR(value)));
 		}
 	}
 
 	validateOrderDirection(value: any) {
-		if (value != constants.ORDERBYDIRECTIONASC && value != constants.ORDERBYDIRECTIONDESC) {
+		if (value && value != constants.ORDERBYDIRECTIONASC && value != constants.ORDERBYDIRECTIONDESC) {
 			this.errors.push(new Error(constants.ORDERDIRECTION_TYPE_ERROR(value)));
 		}
 	}

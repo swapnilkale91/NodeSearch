@@ -14,7 +14,7 @@ export class SearchRepository {
 	}
 
 	public async getSearch(searchparams: SearchParamsDTO) {
-		const tablename = createQueries.getTableName('table_search', 'SearchApp', this.pgp);
+		const tablename = createQueries.getTableName(CONSTANTS.SEARCH_TABLE_NAME, CONSTANTS.SEARCH_SCHEMA_NAME, this.pgp);
 		return this.databaseObject.any(searchQueries.searchQuery(searchparams, tablename, this.pgp));
 	}
 }

@@ -5,7 +5,6 @@ import * as createQueries from '../db/create-sql';
 import * as fs from 'fs';
 import * as util from 'util';
 
-
 export class CreateSchema {
 
 	private readonly databaseObject: any;
@@ -16,7 +15,7 @@ export class CreateSchema {
 		this.app = app;
 		this.pgp = dependencies.PGP;
 		this.databaseObject = dependencies.databaseConfig;
-		//this.createSchemaAndTables();
+		this.createSchemaAndTables();
 	}
 
 	public async createSchemaAndTables() {

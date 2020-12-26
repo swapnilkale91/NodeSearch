@@ -5,10 +5,12 @@ export let searchQuery = (searchparams: SearchParamsDTO, tablename: string, pgp:
 	let query = `select id, name, imageurl, description, count(*) OVER() AS totalCount
 				 from ${tablename}`
 	if (!searchparams.search) {
-		query += orderLimitOffset(searchparams);
+		query += getOrderByQuery(searchparams);
+		query += getLimitOffsetQuery(searchparams);
 	} else {
 		query += getWhereClause(searchparams.search);
-		query += orderLimitOffset(searchparams);
+		query += getOrderByQuery(searchparams);
+		query += getLimitOffsetQuery(searchparams);
 	}
 
 	return query;
@@ -29,6 +31,16 @@ function getWhereClause(search: string) {
 	return whereclause;
 }
 
-function orderLimitOffset(searchparams: SearchParamsDTO) {
-	return ` order by "${searchparams.orderby || 'id'}" ${searchparams.orderdirection || 'asc'} limit ${searchparams.itemsperpage} offset ${searchparams.offset}`;
+function getOrderByQuery(searchparams: SearchParamsDTO) {
+	if(searchparams.orderby)
+		return ` order by "${searchparams.orderby}" ${searchparams.orderdirection || 'asc'}`;
+	else
+		return ``;
+}
+
+function getLimitOffsetQuery(searchparams: SearchParamsDTO) {
+	if(searchparams.itemsperpage)
+		return ` limit ${searchparams.itemsperpage} offset ${searchparams.offset || 0}`;
+	else
+		return ``;
 }

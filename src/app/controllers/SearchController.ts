@@ -3,7 +3,6 @@ import { Dependencies } from '../types/dependencies';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { SearchValidation } from '../validators/SearchValidation';
-import { SearchParamsDTO } from 'common';
 
 export class SearchController {
 
@@ -26,7 +25,7 @@ export class SearchController {
 
 	public async getSearch(req: express.Request, res: express.Response): Promise<any> {
 		try {
-			// this.searchvalidation.validateSearchRequest(req.query, res);
+			//this.searchvalidation.validateSearchRequest(req.query, res);
 			const output = await this.searchService.getSearch(req.query);
 			const totalCount = output[0] ? output[0].totalcount : 0;
 			output.map((value: any) => delete value.totalcount);

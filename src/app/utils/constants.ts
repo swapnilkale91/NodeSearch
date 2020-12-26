@@ -1,6 +1,6 @@
 /* App Level constants */
 export const SEARCH_TABLE_NAME = 'table_search';
-export const SEARCH_SCHEMA_NAME  = 'search_app';
+export const SEARCH_SCHEMA_NAME  = 'SearchApp';
 
 /* Search columns */
 export const ITEMSPERPAGE = 'itemsperpage';
@@ -14,7 +14,6 @@ export const DATELASTEDITED = 'datelastedited';
 export const ORDERBYDIRECTIONASC = 'asc';
 export const ORDERBYDIRECTIONDESC = 'desc';
 export const SEARCH_VALID_PROPERTIES = [ITEMSPERPAGE, PAGENUMBER, OFFSET, SEARCH, ORDERBY, ORDERDIRECTION];
-export const SEARCH_MAND_PROPERTIES = [ITEMSPERPAGE, PAGENUMBER];
 
 /* Error messages */
 export let INT_TYPE_ERROR = (prop: any, type: any) => `Property ${prop} should be a positive ${type}`;
